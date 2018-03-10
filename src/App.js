@@ -17,16 +17,22 @@ class App extends Component {
         'totalDistinctReq': [],
         'averageResTime': 0,
         'sucessStatus': [],
-        'respArray': []
-      }
+        'respArray': [],
+        'respData': []
+      },
+      MasterData: [{pid: 'loading ..', msg: 'loading ..', ms: 'loading ..'}]
     }
     socket.on('broadcast', (newCallState) => this.handleStateChange(newCallState));
   }
 
   handleStateChange(newstate){
     this.state.feed = JSON.parse(newstate.description)
+    if (this.state.MasterData.length > 1000) {
+      this.state.MasterData = [];
+    }
+    this.state.MasterData = this.state.MasterData.concat(this.state.feed.responseData)
+    console.log("data is ", this.state.MasterData)
     this.setState(this.state)
-    console.log(this.state.feed)
   }
 
   render() {
@@ -36,7 +42,7 @@ class App extends Component {
         <div>
           <Counter  totalReqCount={this.state.feed.totalReqCount} totalDistinctCount={this.state.feed.totalDistinctReq}
                     averageResTime={this.state.feed.averageResTime} sucessStatus={this.state.feed.sucessStatus}
-                    respArray={this.state.feed.respArray} />
+                    respArray={this.state.feed.respArray} respData={this.state.MasterData}/>
         </div>
       </div>
     );
