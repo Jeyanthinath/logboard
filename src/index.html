@@ -1,0 +1,8 @@
+<script src="socket.io.js"></script>
+<script>
+    var socket = io('http://localhost:1337/');
+    socket.on('broadcast',function(data) {
+            document.body.innerHTML = '';
+            document.write(data.description);
+        });
+</script>
