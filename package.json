@@ -8,6 +8,7 @@
     "react": "^16.2.0",
     "react-chartkick": "^0.1.6",
     "react-dom": "^16.2.0",
+    "react-google-charts": "^1.5.5",
     "react-scripts": "1.1.1",
     "socket-io": "^1.0.0"
   },

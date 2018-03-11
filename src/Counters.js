@@ -1,7 +1,7 @@
 
 import React, { Component } from 'react';
 import Chartjs from 'chart.js';
-import { AreaChart, PieChart } from 'react-chartkick';
+import { AreaChart, PieChart, GeoChart } from 'react-chartkick';
 
 
 class Counter extends Component {
@@ -9,8 +9,8 @@ class Counter extends Component {
         return (
             <div className="row">
                 <div className="row">
-                    <div>
-                        <h4> Counters (past 6 hours)</h4>
+                     <div>
+                        <h4> Counters (past 1 hour)</h4>
                         <hr />
                     </div>
                     <div className="col s12 m4 l4">
@@ -83,29 +83,33 @@ class Counter extends Component {
                 <div className="col s12 m12 l12">
                         <div className="card blue-grey darken-1">
                             <div className="card-content white-text">
-                                <span className="card-title"> <i className="material-icons">clear_all</i> Log request types </span>
+                                <span className="card-title"> <i className="material-icons">clear_all</i> Log Stream </span>
                                 <table>
                                     <thead>
                                         <tr>
+                                            <th> Req Time </th>
                                             <th> pid </th>
                                             <th> response Time (ms)</th>
                                             <th> msg </th>
+                                            <th> Status </th>
                                         </tr>
                                     </thead>
                                     <tbody>
                                         {this.props.respData.map((x) => {
                                             return (
                                                 <tr>
+                                                    <td> {x.reqStart} </td>
                                                     <td> {x.pid} </td>
                                                     <td> {x.ms} </td>
                                                     <td> {x.msg} </td>
+                                                    <td> {x.res} </td>
                                                 </tr>
                                             )
                                         })}
                                     </tbody>
                                 </table>
                             </div>
-                        </div>
+                                    </div>
                     </div>
                 </div>
             </div>
