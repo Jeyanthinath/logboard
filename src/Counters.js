@@ -5,11 +5,14 @@ import { AreaChart, PieChart, GeoChart } from 'react-chartkick';
 
 
 class Counter extends Component {
+    constructor() {
+        super();
+    }
     render() {
         return (
             <div className="row">
                 <div className="row">
-                     <div>
+                    <div>
                         <h4> Counters (past 1 hour)</h4>
                         <hr />
                     </div>
@@ -57,7 +60,7 @@ class Counter extends Component {
                 </div>
                 <hr />
                 <div className='row'>
-                    <div className="col s12 m4 l4">
+                    <div className="col s12 m6 l6">
                         <div className='row'>
                             <h4> Success Rate </h4>
                         </div>
@@ -65,51 +68,80 @@ class Counter extends Component {
                             <PieChart colors={["#0ce821", "#d81740"]} data={this.props.sucessStatus} />
                         </div>
                     </div>
-                    <div className="col s12 m8 l8">
                     <div className='row'>
-                            <h4> Response time chart (last 4-6 minutes) </h4>
-                        </div>
-                        <div className='row'>
-                        <AreaChart data={this.props.respArray} />
-                        </div>
-                    </div>
-                </div>
-                <div className='row'>
-                    <div className='col s12 m12 l12'>
-                    {/* <GeoChart data={[["United States", 44], ["Germany", 23], ["Brazil", 22], ["india", 22]]} /> */}
-                    </div>
-                </div>
-                <div className='row'>
-                <div className="col s12 m12 l12">
-                        <div className="card blue-grey darken-1">
-                            <div className="card-content white-text">
-                                <span className="card-title"> <i className="material-icons">clear_all</i> Log Stream </span>
-                                <table>
-                                    <thead>
-                                        <tr>
-                                            <th> Req Time </th>
-                                            <th> pid </th>
-                                            <th> response Time (ms)</th>
-                                            <th> msg </th>
-                                            <th> Status </th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        {this.props.respData.map((x) => {
+                        <div className="col s12 m6 l6">
+                            <div className="card blue-grey darken-1">
+                                <div className="card-content white-text">
+                                    <span className="card-title"> <i className="material-icons">clear_all</i> Country of Interest (of last 100 requests)  </span>
+                                    <table>
+                                        <thead>
+                                            <tr>
+                                                <th> Country </th>
+                                                <th> User Count (Approx).</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            {this.props.reqIPCountry.map((x) => {
                                             return (
                                                 <tr>
-                                                    <td> {x.reqStart} </td>
-                                                    <td> {x.pid} </td>
-                                                    <td> {x.ms} </td>
-                                                    <td> {x.msg} </td>
-                                                    <td> {x.res} </td>
+                                                    <td> {x.country} </td>
+                                                    <td> {x.count} </td>
                                                 </tr>
                                             )
                                         })}
-                                    </tbody>
-                                </table>
+                                        </tbody>
+                                    </table>
+                                </div>
                             </div>
-                                    </div>
+                        </div>
+                    </div>
+                </div>
+                <hr/>
+                <div className='row'>
+                    <div className='col s12 m12 l12'>
+                        {/* <GeoChart data={[["United States", 44], ["Germany", 23], ["Brazil", 22], ["india", 22]]} /> */}
+                    </div>
+                </div>
+                <div className='row'>
+
+                <div className="col s12 m12 l12">
+                        <div className='row'>
+                            <h4> Response time chart (last 4-6 minutes) </h4>
+                        </div>
+                        <div className='row'>
+                            <AreaChart data={this.props.respArray} />
+                        </div>
+                    </div>
+                    <div className='row'>
+                        <div className="col s12 m12 l12">
+                            <div className="card blue-grey darken-1">
+                                <div className="card-content white-text">
+                                    <span className="card-title"> <i className="material-icons">clear_all</i> Log Stream </span>
+                                    <table>
+                                        <thead>
+                                            <tr>
+                                                <th> Req Time </th>
+                                                <th> pid </th>
+                                                <th> response Time (ms)</th>
+                                                <th> msg </th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            {this.props.respData.map((x) => {
+                                                return (
+                                                    <tr className={`${x.level > 39 ? `${x.level> 49 ? 'error': 'warning'}` : ''}`}>
+                                                        <td> {x.reqStart} </td>
+                                                        <td> {x.pid} </td>
+                                                        <td> {x.ms} </td>
+                                                        <td> {x.msg} </td>
+                                                    </tr>
+                                                )
+                                            })}
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>

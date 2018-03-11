@@ -1,11 +1,12 @@
 import React, { Component } from 'react';
 import './Material.css'
 import './googlefont.css'
+import './App.css'
 import Menu from './Menu.js';
 import Counter from './Counters.js'
 import io from 'socket.io-client';
 
-let socket = io('http://localhost:1337/')
+let socket = io('http://faithful-badger.hackathon.venom360.com:1337')
 
 class App extends Component {
 
@@ -18,7 +19,8 @@ class App extends Component {
         'averageResTime': 0,
         'sucessStatus': [],
         'respArray': [],
-        'respData': []
+        'respData': [],
+        'reqIPCountry': [],
       },
       MasterData: [{pid: 'loading ..', msg: 'loading ..', ms: 'loading ..'}]
     }
@@ -28,7 +30,7 @@ class App extends Component {
   handleStateChange(newstate){
     this.state.feed = JSON.parse(newstate.description)
     this.state.MasterData = this.state.feed.responseData;
-    console.log("data is ", this.state.MasterData)
+    console.log("data is ", this.state.feed.reqIPCountry)
     this.setState(this.state)
   }
 
@@ -39,7 +41,8 @@ class App extends Component {
         <div>
           <Counter  totalReqCount={this.state.feed.totalReqCount} totalDistinctCount={this.state.feed.totalDistinctReq}
                     averageResTime={this.state.feed.averageResTime} sucessStatus={this.state.feed.sucessStatus}
-                    respArray={this.state.feed.respObj} respData={this.state.MasterData}/>
+                    respArray={this.state.feed.respObj} respData={this.state.MasterData}
+                    reqIPCountry={this.state.feed.reqIPCountry} />
         </div>
       </div>
     );
